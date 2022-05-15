@@ -1,9 +1,8 @@
 package com.example.webapp.model.travels;
-import com.example.webapp.model.geographicPlaces.Airport;
-import com.example.webapp.model.geographicPlaces.City;
 import com.example.webapp.model.geographicPlaces.EndPlace;
+import com.example.webapp.model.geographicPlaces.StartPlace;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
 
 public class Travel {
@@ -11,8 +10,8 @@ public class Travel {
     long id;
     StartPlace startPlace;
     EndPlace endPlace;
-    BigDecimal dateOut;
-    BigDecimal dateIn;
+    Date dateOut;
+    Date dateIn;
     int days;
     TravelType travelType;
     double priceForAnAdult;
@@ -21,7 +20,7 @@ public class Travel {
     int numberOfAdults;
     int numberOfChildren;
 
-    public Travel(long id, StartPlace startPlace, EndPlace endPlace, BigDecimal dateOut, BigDecimal dateIn, int days,
+    public Travel(long id, StartPlace startPlace, EndPlace endPlace, Date dateOut, Date dateIn, int days,
                   TravelType travelType, double priceForAnAdult, double priceForAChild, boolean promoted,
                   int numberOfAdults, int numberOfChildren) {
         this.id = id;
@@ -62,19 +61,19 @@ public class Travel {
         this.endPlace = endPlace;
     }
 
-    public BigDecimal getDateOut() {
+    public Date getDateOut() {
         return dateOut;
     }
 
-    public void setDateOut(BigDecimal dateOut) {
+    public void setDateOut(Date dateOut) {
         this.dateOut = dateOut;
     }
 
-    public BigDecimal getDateIn() {
+    public Date getDateIn() {
         return dateIn;
     }
 
-    public void setDateIn(BigDecimal dateIn) {
+    public void setDateIn(Date dateIn) {
         this.dateIn = dateIn;
     }
 
@@ -134,30 +133,4 @@ public class Travel {
         this.numberOfChildren = numberOfChildren;
     }
 
-    public static class StartPlace {
-
-        City city;
-        Airport airport;
-
-        public StartPlace(City city, Airport airport) {
-            this.city = city;
-            this.airport = airport;
-        }
-
-        public City getCity() {
-            return city;
-        }
-
-        public void setCity(City city) {
-            this.city = city;
-        }
-
-        public Airport getAirport() {
-            return airport;
-        }
-
-        public void setAirport(Airport airport) {
-            this.airport = airport;
-        }
-    }
 }
