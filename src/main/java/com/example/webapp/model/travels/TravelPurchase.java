@@ -4,19 +4,17 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "TravelPurchase")
+@Entity(name = "travelPurchase")
 public class TravelPurchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "Travel")
-    @JoinColumn(name = "travels_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "travelPurchase")
     private Set<Travel> travels = new HashSet<>();
     @Column(length = 15)
     private double price;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "TravelParticipants")
-    @JoinColumn(name = "listOfParticipants_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "travelPurchase")
     private Set<TravelParticipants> listOfParticipants = new HashSet<>();
 
     public TravelPurchase(long id, Set<Travel> travels, double price, Set<TravelParticipants> listOfParticipants) {

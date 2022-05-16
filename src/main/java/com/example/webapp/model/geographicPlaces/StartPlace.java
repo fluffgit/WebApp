@@ -1,24 +1,31 @@
 package com.example.webapp.model.geographicPlaces;
 
+import com.example.webapp.model.travels.Travel;
+
 import javax.persistence.*;
 
-@Entity(name = "StartPlace")
+@Entity(name = "startPlace")
 public class StartPlace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
-    @JoinColumn(name = "City_id")
+    @JoinColumn(name = "city_id")
     private City city;
     @OneToOne
-    @JoinColumn(name = "Airport_id")
+    @JoinColumn(name = "airport_id")
     private Airport airport;
 
-    public StartPlace(long id, City city, Airport airport) {
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "travel_id")
+    private Travel travel;
+
+    public StartPlace(long id, City city, Airport airport, Travel travel) {
         this.id = id;
         this.city = city;
         this.airport = airport;
+        this.travel = travel;
     }
 
     public StartPlace() {
@@ -46,5 +53,13 @@ public class StartPlace {
 
     public void setAirport(Airport airport) {
         this.airport = airport;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel travel) {
+        this.travel = travel;
     }
 }

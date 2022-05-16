@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "TravelParticipants")
+@Entity(name = "travelParticipants")
 public class TravelParticipants {
 
     @Id
@@ -16,17 +16,20 @@ public class TravelParticipants {
     private String surname;
     @Column(length = 5)
     private int age;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "Travel")
-    @JoinColumn(name = "travels_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "travelParticipants")
     private Set<Travel> travels = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "travelPurchase_id")
+    private TravelPurchase travelPurchase;
 
-    public TravelParticipants(long id, String name, String surname, int age, Set<Travel> travels) {
+    public TravelParticipants(long id, String name, String surname, int age, Set<Travel> travels, TravelPurchase travelPurchase) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.travels = travels;
+        this.travelPurchase = travelPurchase;
     }
 
     public TravelParticipants() {
@@ -71,5 +74,13 @@ public class TravelParticipants {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public TravelPurchase getTravelPurchase() {
+        return travelPurchase;
+    }
+
+    public void setTravelPurchase(TravelPurchase travelPurchase) {
+        this.travelPurchase = travelPurchase;
     }
 }

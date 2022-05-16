@@ -2,7 +2,7 @@ package com.example.webapp.model.geographicPlaces;
 
 import javax.persistence.*;
 
-@Entity(name = "Country")
+@Entity(name = "country")
 public class Country {
 
     @Id

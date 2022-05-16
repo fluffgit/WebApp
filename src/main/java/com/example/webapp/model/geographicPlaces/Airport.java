@@ -2,7 +2,7 @@ package com.example.webapp.model.geographicPlaces;
 
 import javax.persistence.*;
 
-@Entity(name = "Airport")
+@Entity(name = "airport")
 public class Airport {
 
     @Id
@@ -11,7 +11,7 @@ public class Airport {
     @Column(length = 30)
     private String nameAirport;
     @OneToOne
-    @JoinColumn(name = "Country_id")
+    @JoinColumn(name = "country_id")
     private Country country;
 
     public Airport(Long id, String nameAirport, Country country) {

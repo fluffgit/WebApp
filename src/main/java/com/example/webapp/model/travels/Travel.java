@@ -7,17 +7,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "Travel")
+@Entity(name = "travel")
 public class Travel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "StartPlace")
-    @JoinColumn(name = "startPlaces_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "travel")
     private Set<StartPlace> startPlaces = new HashSet<>();
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "EndPlace")
-    @JoinColumn(name = "startPlaces_id")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "travel")
     private Set<EndPlace> endPlaces = new HashSet<>();
     @Column(length = 15)
     private Date dateOut;
@@ -38,9 +36,18 @@ public class Travel {
     @Column(length = 5)
     private int numberOfChildren;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "travelParticipants_id")
+    private TravelParticipants travelParticipants;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "travelPurchase_id")
+    private TravelPurchase travelPurchase;
+
     public Travel(long id, Set<StartPlace> startPlaces, Set<EndPlace> endPlaces, Date dateOut, Date dateIn, int days,
                   TravelType travelType, double priceForAnAdult, double priceForAChild, boolean promoted,
-                  int numberOfAdults, int numberOfChildren) {
+                  int numberOfAdults, int numberOfChildren, TravelParticipants travelParticipants,
+                  TravelPurchase travelPurchase) {
         this.id = id;
         this.startPlaces = startPlaces;
         this.endPlaces = endPlaces;
@@ -53,6 +60,8 @@ public class Travel {
         this.promoted = promoted;
         this.numberOfAdults = numberOfAdults;
         this.numberOfChildren = numberOfChildren;
+        this.travelParticipants = travelParticipants;
+        this.travelPurchase = travelPurchase;
     }
 
     public Travel() {
@@ -155,4 +164,19 @@ public class Travel {
         this.numberOfChildren = numberOfChildren;
     }
 
+    public TravelParticipants getTravelParticipants() {
+        return travelParticipants;
+    }
+
+    public void setTravelParticipants(TravelParticipants travelParticipants) {
+        this.travelParticipants = travelParticipants;
+    }
+
+    public TravelPurchase getTravelPurchase() {
+        return travelPurchase;
+    }
+
+    public void setTravelPurchase(TravelPurchase travelPurchase) {
+        this.travelPurchase = travelPurchase;
+    }
 }
