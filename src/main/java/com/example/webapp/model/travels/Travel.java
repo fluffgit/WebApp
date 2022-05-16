@@ -14,8 +14,10 @@ public class Travel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "StartPlace")
+    @JoinColumn(name = "startPlaces_id")
     private Set<StartPlace> startPlaces = new HashSet<>();
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "EndPlace")
+    @JoinColumn(name = "startPlaces_id")
     private Set<EndPlace> endPlaces = new HashSet<>();
     @Column(length = 15)
     private Date dateOut;

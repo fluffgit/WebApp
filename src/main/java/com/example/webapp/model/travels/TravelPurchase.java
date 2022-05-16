@@ -11,10 +11,12 @@ public class TravelPurchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "Travel")
+    @JoinColumn(name = "travels_id")
     private Set<Travel> travels = new HashSet<>();
     @Column(length = 15)
     private double price;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "TravelParticipants")
+    @JoinColumn(name = "listOfParticipants_id")
     private Set<TravelParticipants> listOfParticipants = new HashSet<>();
 
     public TravelPurchase(long id, Set<Travel> travels, double price, Set<TravelParticipants> listOfParticipants) {

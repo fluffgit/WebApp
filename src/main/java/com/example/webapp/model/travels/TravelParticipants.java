@@ -17,6 +17,7 @@ public class TravelParticipants {
     @Column(length = 5)
     private int age;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "Travel")
+    @JoinColumn(name = "travels_id")
     private Set<Travel> travels = new HashSet<>();
 
 
