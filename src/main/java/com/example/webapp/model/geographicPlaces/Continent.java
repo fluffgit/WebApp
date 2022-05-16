@@ -9,9 +9,7 @@ public enum Continent {
     ASIA("Azja"),
     AUSTRALIA_AND_OCEANIA("Australia i Oceania");
 
-    final String description;
 
     Continent(String description) {
-        this.description = description;
     }
 }

@@ -1,16 +1,40 @@
 package com.example.webapp.model.geographicPlaces;
 
+import javax.persistence.*;
 
+@Entity(name = "EndPlace")
 public class EndPlace {
 
-    City city;
-    Hotel hotel;
-    Airport airport;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToOne
+    @JoinColumn(name = "City_id")
+    private City city;
+    @OneToOne
+    @JoinColumn(name = "Hotel_id")
+    private Hotel hotel;
+    @OneToOne
+    @JoinColumn(name = "Airport_id")
+    private Airport airport;
 
-    public EndPlace(City city, Hotel hotel, Airport airport) {
+    public EndPlace(long id, City city, Hotel hotel, Airport airport) {
+        this.id = id;
         this.city = city;
         this.hotel = hotel;
         this.airport = airport;
+    }
+
+    public EndPlace() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public City getCity() {

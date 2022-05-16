@@ -2,30 +2,46 @@ package com.example.webapp.model.travels;
 import com.example.webapp.model.geographicPlaces.EndPlace;
 import com.example.webapp.model.geographicPlaces.StartPlace;
 
+import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-
+@Entity(name = "Travel")
 public class Travel {
 
-    long id;
-    StartPlace startPlace;
-    EndPlace endPlace;
-    Date dateOut;
-    Date dateIn;
-    int days;
-    TravelType travelType;
-    double priceForAnAdult;
-    double priceForAChild;
-    boolean promoted;
-    int numberOfAdults;
-    int numberOfChildren;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "StartPlace")
+    private Set<StartPlace> startPlaces = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "EndPlace")
+    private Set<EndPlace> endPlaces = new HashSet<>();
+    @Column(length = 15)
+    private Date dateOut;
+    @Column(length = 15)
+    private Date dateIn;
+    @Column(length = 5)
+    private int days;
+    @Column(length = 5)
+    private TravelType travelType;
+    @Column(length = 10)
+    private double priceForAnAdult;
+    @Column(length = 10)
+    private double priceForAChild;
+    @Column(length = 10)
+    private boolean promoted;
+    @Column(length = 5)
+    private int numberOfAdults;
+    @Column(length = 5)
+    private int numberOfChildren;
 
-    public Travel(long id, StartPlace startPlace, EndPlace endPlace, Date dateOut, Date dateIn, int days,
+    public Travel(long id, Set<StartPlace> startPlaces, Set<EndPlace> endPlaces, Date dateOut, Date dateIn, int days,
                   TravelType travelType, double priceForAnAdult, double priceForAChild, boolean promoted,
                   int numberOfAdults, int numberOfChildren) {
         this.id = id;
-        this.startPlace = startPlace;
-        this.endPlace = endPlace;
+        this.startPlaces = startPlaces;
+        this.endPlaces = endPlaces;
         this.dateOut = dateOut;
         this.dateIn = dateIn;
         this.days = days;
@@ -37,6 +53,10 @@ public class Travel {
         this.numberOfChildren = numberOfChildren;
     }
 
+    public Travel() {
+
+    }
+
     public long getId() {
         return id;
     }
@@ -45,20 +65,20 @@ public class Travel {
         this.id = id;
     }
 
-    public StartPlace getStartPlace() {
-        return startPlace;
+    public Set<StartPlace> getStartPlaces() {
+        return startPlaces;
     }
 
-    public void setStartPlace(StartPlace startPlace) {
-        this.startPlace = startPlace;
+    public void setStartPlaces(Set<StartPlace> startPlaces) {
+        this.startPlaces = startPlaces;
     }
 
-    public EndPlace getEndPlace() {
-        return endPlace;
+    public Set<EndPlace> getEndPlaces() {
+        return endPlaces;
     }
 
-    public void setEndPlace(EndPlace endPlace) {
-        this.endPlace = endPlace;
+    public void setEndPlaces(Set<EndPlace> endPlaces) {
+        this.endPlaces = endPlaces;
     }
 
     public Date getDateOut() {

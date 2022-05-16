@@ -11,9 +11,7 @@ public enum TravelType {
     PP("(program package) – posiłki wydawane zgodnie z programem"),
     ZPR(" posiłki wydawane zgodnie z programem hotelu lub opisem imprezy");
 
-    final String description;
-
     TravelType(String description) {
-        this.description = description;
     }
+
 }

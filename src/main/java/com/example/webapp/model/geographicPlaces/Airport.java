@@ -1,14 +1,35 @@
 package com.example.webapp.model.geographicPlaces;
 
+import javax.persistence.*;
 
+@Entity(name = "Airport")
 public class Airport {
 
-    String nameAirport;
-    Country country;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(length = 30)
+    private String nameAirport;
+    @OneToOne
+    @JoinColumn(name = "Country_id")
+    private Country country;
 
-    public Airport(String nameAirport, Country country) {
+    public Airport(Long id, String nameAirport, Country country) {
+        this.id = id;
         this.nameAirport = nameAirport;
         this.country = country;
+    }
+
+    public Airport() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNameAirport() {

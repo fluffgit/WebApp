@@ -1,28 +1,43 @@
 package com.example.webapp.model.travels;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity(name = "TravelParticipants")
 public class TravelParticipants {
 
-    long id;
-    String name;
-    String surname;
-    int age;
-    Travel travel;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(length = 30)
+    private String name;
+    @Column(length = 30)
+    private String surname;
+    @Column(length = 5)
+    private int age;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "Travel")
+    private Set<Travel> travels = new HashSet<>();
 
-    public TravelParticipants(long id, String name, String surname, int age, Travel travel) {
+
+    public TravelParticipants(long id, String name, String surname, int age, Set<Travel> travels) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.travel = travel;
+        this.travels = travels;
     }
 
-    public Travel getTravel() {
-        return travel;
+    public TravelParticipants() {
+
     }
 
-    public void setTravel(Travel travel) {
-        this.travel = travel;
+    public Set<Travel> getTravels() {
+        return travels;
+    }
+
+    public void setTravels(Set<Travel> travels) {
+        this.travels = travels;
     }
 
     public long getId() {

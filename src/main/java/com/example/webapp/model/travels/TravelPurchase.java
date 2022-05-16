@@ -1,19 +1,31 @@
 package com.example.webapp.model.travels;
 
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity(name = "TravelPurchase")
 public class TravelPurchase {
 
-    long id;
-    Travel travel;
-    double price;
-    List<TravelParticipants> listOfParticipants;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "Travel")
+    private Set<Travel> travels = new HashSet<>();
+    @Column(length = 15)
+    private double price;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "TravelParticipants")
+    private Set<TravelParticipants> listOfParticipants = new HashSet<>();
 
-    public TravelPurchase(long id, Travel travel, double price, List<TravelParticipants> listOfParticipants) {
+    public TravelPurchase(long id, Set<Travel> travels, double price, Set<TravelParticipants> listOfParticipants) {
         this.id = id;
-        this.travel = travel;
+        this.travels = travels;
         this.price = price;
         this.listOfParticipants = listOfParticipants;
+    }
+
+    public TravelPurchase() {
+
     }
 
     public long getId() {
@@ -24,12 +36,12 @@ public class TravelPurchase {
         this.id = id;
     }
 
-    public Travel getTravel() {
-        return travel;
+    public Set<Travel> getTravels() {
+        return travels;
     }
 
-    public void setTravel(Travel travel) {
-        this.travel = travel;
+    public void setTravels(Set<Travel> travels) {
+        this.travels = travels;
     }
 
     public double getPrice() {
@@ -40,11 +52,11 @@ public class TravelPurchase {
         this.price = price;
     }
 
-    public List<TravelParticipants> getListOfParticipants() {
+    public Set<TravelParticipants> getListOfParticipants() {
         return listOfParticipants;
     }
 
-    public void setListOfParticipants(List<TravelParticipants> listOfParticipants) {
+    public void setListOfParticipants(Set<TravelParticipants> listOfParticipants) {
         this.listOfParticipants = listOfParticipants;
     }
 }
