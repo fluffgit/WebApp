@@ -14,13 +14,21 @@ public class City {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    public City(String nameCity, Country country) {
+    public City(Long id, String nameCity, Country country) {
         this.nameCity = nameCity;
         this.country = country;
     }
 
     public City() {
 
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNameCity() {
