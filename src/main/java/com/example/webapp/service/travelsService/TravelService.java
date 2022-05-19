@@ -92,4 +92,9 @@ public class TravelService {
     public List<Travel> getTravelsByPrice(TravelPurchase travelPurchase) {
         return travelRepository.findAll(Sort.by(String.valueOf(travelPurchase.getPrice())));
     }
+
+    // get TravelsByDateBuy
+    public List<Travel> getTravelsByDateBuy(TravelPurchase travelPurchase) {
+        return travelRepository.findAll(Sort.by(String.valueOf(travelPurchase.getDateBuy())));
+    }
 }
